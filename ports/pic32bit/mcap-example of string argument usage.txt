@@ -1,0 +1,34 @@
+#include "py/nlr.h"
+#include "py/obj.h"
+#include "py/runtime.h"
+#include "py/binary.h"
+//#include "portmodules.h"
+
+#include <stdio.h>
+STATIC mp_obj_t printfun(mp_obj_t what) {
+    mp_obj_str_get_str(what);
+    char tmpString[100];
+	sprintf(tmpString,"argument is: -%s-!\n", mp_obj_str_get_str(what));
+    printf(tmpString);
+	return mp_const_none;
+}
+
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mcap_printfun_obj, printfun);
+
+
+
+
+STATIC const mp_map_elem_t mcap_globals_table[] = {
+	{ MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_mcap) },
+	{ MP_OBJ_NEW_QSTR(MP_QSTR_printfun), (mp_obj_t)&mcap_printfun_obj },
+};
+
+STATIC MP_DEFINE_CONST_DICT (
+	mp_module_mcap_globals,
+	mcap_globals_table
+);
+
+const mp_obj_module_t mp_module_mcap = {
+	.base = { &mp_type_module },
+	.globals = (mp_obj_dict_t*)&mp_module_mcap_globals,
+};
