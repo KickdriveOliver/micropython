@@ -1,4 +1,4 @@
-2025-09-05 oliver.heggelbacher@fullmo.de
+2025-10-29 oliver.heggelbacher@fullmo.de
 Micropython integration in MPLAB X / PIC32MZ / XC32 v2.50 / Harmony v1.11
 
 - Based on https://github.com/micropython/micropython master
@@ -7,9 +7,16 @@ Commit 5ed578e5
 by Paul Sokolovsky, 26.10.2018 21:27
 committed by Damien George, 20.12.2018 07:52
 
+and cherry picked:
+Commit 7cd59c5b
+by Damien George, 15.12.2018 05:13
+committed 21.12.2018 15:40
+py/mpconfig: Move MICROPY_VERSION macros to static ones in mpconfig.h.
+
 - fullmo specific additions: ports\pic32bit
   (based on ports\pic16bit, modifications, e.g. for pic32bit: #define MPZ_DIG_SIZE (16)
 
-- Added helper ports/pic32bit/pic32bit-make-qstr-port.py
-  to allow adding new QSTR in mcdrive.c, mccom.c, a.s.o without recompiling micropython via 
-  GNU make / Makefile
+- Added helper 
+  ports/pic32bit/pic32bit-make-qstr-port.py
+  to allow adding new QSTR in py_obj_mcdrive.c, py_obj_refgo.c, a.s.o without 
+  recompiling micropython via GNU make / Makefile

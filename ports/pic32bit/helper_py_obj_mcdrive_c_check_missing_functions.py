@@ -4,7 +4,7 @@ import re
 with open('../../../IEC61800/targetlib.c', 'r') as f:
     targetlib_content = f.read()
 
-with open('mcdrive.c', 'r') as f:
+with open('py_obj_mcdrive.c', 'r') as f:
     mcdrive_content = f.read()
 
 # Extract function names using regular expressions
@@ -17,7 +17,7 @@ common_functions = set(targetlib_functions) & set(mcdrive_functions)
 # Find functions mentioned only in targetlib.c
 targetlib_only_functions = set(targetlib_functions) - common_functions
 
-print("Functions mentioned both in targetlib.c and mcdrive.c:")
+print("Functions mentioned both in targetlib.c and py_obj_mcdrive.c:")
 print(common_functions)
 
 print("\nFunctions mentioned only in targetlib.c:")

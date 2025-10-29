@@ -1,29 +1,3 @@
-/*
- * This file is part of the MicroPython project, http://micropython.org/
- *
- * The MIT License (MIT)
- *
- * Copyright (c) 2015 Damien P. George
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
 #include <stdint.h>
 #include <alloca.h>
 
@@ -91,7 +65,6 @@ typedef int mp_off_t;
 // extra builtin modules to add to the list of known ones
 extern const struct _mp_obj_module_t pyb_module;
 extern const struct _mp_obj_module_t mp_module_mcdrive;
-extern const struct _mp_obj_module_t mp_module_mccom;
 extern const struct _mp_obj_module_t mp_module_refgo;
 extern const struct _mp_obj_module_t mp_module_sys;
 
@@ -101,7 +74,6 @@ extern const struct _mp_obj_module_t mp_module_sys;
     { MP_ROM_QSTR(MP_QSTR_pyb), MP_ROM_PTR(&pyb_module) }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_mcdrive), (mp_obj_t)&mp_module_mcdrive }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_drive), (mp_obj_t)&mp_module_mcdrive }, \
-    { MP_OBJ_NEW_QSTR(MP_QSTR_mccom), (mp_obj_t)&mp_module_mccom }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_refgo), (mp_obj_t)&mp_module_refgo }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_sys), (mp_obj_t)&mp_module_sys }, \
 

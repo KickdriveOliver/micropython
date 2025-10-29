@@ -35,37 +35,24 @@
 
 static int interrupt_char;
 
-
-
-
+typedef uint32_t MCKERNEL_TIMER_TYPE;
+extern volatile MCKERNEL_TIMER_TYPE MCKERNEL_Timer1ms;
+extern volatile uint8_t mcPythonUserAbort;
 
 void mp_hal_init(void) {
     MP_STATE_PORT(keyboard_interrupt_obj) = mp_obj_new_exception(&mp_type_KeyboardInterrupt);
 }
 
-
 mp_uint_t mp_hal_ticks_ms(void) {
-    return (xTaskGetTickCount());
-    
+    return (mp_uint_t)MCKERNEL_Timer1ms;
 }
 
 void mp_hal_delay_ms(mp_uint_t ms) {
-
-    uint32_t startTime, endTime;
-
-    startTime = xTaskGetTickCount();
-    endTime = startTime + ms;
-    if (startTime > endTime)//timer variable overflow situation
-    {
-        while (xTaskGetTickCount() > endTime) {
-         //   printf("sysTimer wait for overflow.. isr counter %lu , end time %lu\r", millis_counter_ISR, endTime);
-        }//we wait untill overflow happens
+    if (ms == 0) return;
+    MCKERNEL_TIMER_TYPE start_time = MCKERNEL_Timer1ms;
+    while ((!mcPythonUserAbort) && MCKERNEL_NOT_TIMEOUT(start_time, ms)) {
+        vTaskDelay(1);
     }
-    while (xTaskGetTickCount() < endTime) {
-      // printf("sysTimer isr counter %lu , end time %lu\r", millis_counter_ISR, endTime);
-    }//we wait untill overflow happens
-  // printf("delay ended\r");
-    //printf functions seems to be interrupt blocking and prolong timing if printed during pause..
 }
 
 void mp_hal_set_interrupt_char(int c) {

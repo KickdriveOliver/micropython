@@ -151,7 +151,7 @@ void uart_tx_char(int chr) {
     // TX output to UDP debug 
     rxBuf[rxBufPos++] = (unsigned char)chr;
     if (rxBufPos == RXBUFSIZE || chr == '\n') {
-        udpDebugWrite(rxBuf, rxBufPos);
+        udpDebugConsoleAppIoWrite(rxBuf, rxBufPos);
         rxBufPos = 0;
     }
 }
